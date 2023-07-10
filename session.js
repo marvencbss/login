@@ -1,22 +1,29 @@
 const tagLogin = document.querySelector('login');
 const tagConteudo = document.querySelector('conteudo');
 
-const btLogin = document.addEventListener('click', login)
+const btLogin = document.createElement('button');
 btLogin.addEventListener('click', login);
-btLogin.innerText='login';
+btLogin.innerText = 'login';
 
 let usuario = sessionStorage.getItem('usuario');
 
 if(!usuario) {
-    tagLogin.innerHTML = `login <input id='txLogin' type='text'>`
+    tagLogin.innerHTML = `
+    Login <input id='txlogin' type='text'> 
+    `
     tagLogin.appendChild(btLogin);
 } else {
-    tagUsuario.innerHTML = `<h1>oi, ${usuario}</h1>`;
+    conteudo();
 }
 
 function login() {
-    const txLogin = document.querySelector('#txLogin');
-    localStorage.setItem
+    const txlogin = document.querySelector('#txlogin');
+    sessionStorage.setItem('usuario', txlogin.value);
+    conteudo();
 }
 
-tagUsuario.innerText = usuario;
+function conteudo() {
+    tagLogin.innerHTML='';
+    usuario = sessionStorage.getItem('usuario');
+    tagConteudo.innerHTML = `<h1>Oi, ${usuario}</h1>`;
+}
