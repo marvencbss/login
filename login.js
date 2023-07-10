@@ -1,30 +1,43 @@
-const Btlogin = document.querySelector('#Btlogin');
+const btLogin = document.querySelector('#btLogin');
 
-Btlogin.addEventListener('click', login);
+btLogin.addEventListener('click', login);
+
+
+function leValor(umId) {
+    const tx = document.querySelector(umId);
+    const val = tx.value;
+    return val;
+}
 
 function login() {
-    const txLogin = document.querySelector('#txLogin');
-    const ValLogin = txLogin.value;
+    const valLogin = leValor('#txLogin');
+    const valSenha = leValor('#txSenha');
 
-    const txSenha = document.querySelector('#txSenha')
-    const valSenha = txSenha.value;
-    validaLogin(ValLogin);
+    const ehValido = validaLogin(valLogin, valSenha);
+    
+    if(ehValido) {
+        mostraMensagem('login válido');
+    } else {
+        mostraMensagem('login inválido');
+    }
+}   
 
-
-const ehValido = validaLogin(ValLogin, valSenha);
-
-if(ehValido) {
-    alert('Válido');
-} else {
-    alert('Inválido');
-}
-}
-
-function validaLogin(umValorLogin, UmValorSenha) {
-
-    if (umValorLogin=='eu' && UmValorSenha=='abcde') {
+function validaLogin(umValorLogin, umValorSenha) {
+    
+    if(umValorLogin=='prof' && umValorSenha=='abcde') {
         return true;
     } else {
         return false;
     }
+
 }
+
+function mostraMensagem(mensagem) {
+    const msgs = document.querySelector('mensagens');
+    const msgInvalido = document.createElement('p');
+    msgInvalido.innerHTML=`<strong>${mensagem}</strong>`;
+    msgs.innerHTML='';
+    msgs.appendChild(msgInvalido);
+
+}
+
